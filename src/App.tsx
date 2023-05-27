@@ -50,6 +50,8 @@ const App = () => {
     localStorage.setItem('searchHistory', JSON.stringify(history))
   }, [history])
 
+  console.log(loading)
+
   return (
     <div className='flex flex-col justify-between h-200px space-y-5'>
       <form onSubmit={handleClick}>
