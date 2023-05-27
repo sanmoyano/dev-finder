@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
+import Header from './components/Header'
+import SearchField from './components/SearchField'
+import Card from './components/Card'
+import History from './components/History'
+import Footer from './components/Footer'
 import { UserData } from './types'
 
 const App = () => {
   const [user, setUser] = useState<UserData>({}as UserData)
   const [searchUser, setUserSearch] = useState<UserData['login']>('')
-  const [history, setHistory] = useState([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [history, setHistory] = useState<UserData[]>([])
+  const [isLoading, setLoading] = useState<boolean>(false)
 
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -50,16 +55,14 @@ const App = () => {
     localStorage.setItem('searchHistory', JSON.stringify(history))
   }, [history])
 
-  console.log(loading)
-
   return (
-    <div className='flex flex-col justify-between h-200px space-y-5'>
-      <form onSubmit={handleClick}>
-        <input className='inputblock w-full text-lg p-2' placeholder='Search user...' value={searchUser} onChange={handleOnChange} />
-        <button type='submit'>search</button>
-      </form>
-      <p className='text-xl'>{user.name}</p>
-    </div>
+    <main className='flex flex-col justify-between h-200px space-y-5'>
+      <Header />
+      <SearchField searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
+      <Card data={user} />
+      <History historyData={history} />
+      <Footer />
+    </main>
   )
 }
 
