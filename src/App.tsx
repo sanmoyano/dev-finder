@@ -67,8 +67,7 @@ const App = () => {
   return (
     <main className='flex flex-col p-10 justify-between space-y-5'>
       <Header />
-      <SearchField searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
-      <button onClick={handleToggleModal}>Open modal</button>
+      <SearchField handleToggleModal={handleToggleModal} searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
       {user.login
         ? (<Card data={user} />)
         : isLoading
