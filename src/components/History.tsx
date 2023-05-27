@@ -3,11 +3,12 @@ import React from 'react'
 import { UserData } from '../types'
 interface Props {
   historyData: UserData[]
+  openModal: boolean
 }
 
-const History = ({ historyData } : Props) => {
+const History = ({ historyData, openModal } : Props) => {
   return (
-    <div>History</div>
+    <div className={`${openModal ? 'flex' : 'hidden'}`}>History</div>
   )
 }
 

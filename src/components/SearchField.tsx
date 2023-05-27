@@ -10,10 +10,12 @@ interface Props {
 
 const SearchField = ({ onHandlerChange, onHandlerClick, searchUser }: Props) => {
   return (
-    <form onSubmit={onHandlerClick}>
-      <input className='inputblock w-full text-lg p-2' placeholder='Search user...' value={searchUser} onChange={onHandlerChange} />
-      <button type='submit'>search</button>
-    </form>
+    <div className='bg-bgColor py-2 pr-2 pl-5 rounded-lg'>
+      <form className='space-x-10 align-middle justify-between flex' onSubmit={onHandlerClick}>
+        <input className='inputblock w-96 text-lg focus:outline-none' placeholder='Search user...' value={searchUser} onChange={onHandlerChange} />
+        <button className='bg-button rounded-md w-16 h-12' type='submit'>S</button>
+      </form>
+    </div>
   )
 }
 

@@ -12,6 +12,7 @@ const App = () => {
   const [searchUser, setUserSearch] = useState<UserData['login']>('')
   const [history, setHistory] = useState<UserData[]>([])
   const [isLoading, setLoading] = useState<boolean>(false)
+  const [openModal, setOpenModal] = useState<boolean>(false)
 
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,16 +21,20 @@ const App = () => {
       const res = await fetch(`https://api.github.com/users/${searchUser}`)
       const userData = await res.json()
 
-      const history = localStorage.getItem('searchHistory')
-      const searchHistory = history ? JSON.parse(history) : []
-      const isDuplicated = searchHistory.some((item:UserData) => item.id === userData.id)
+      if (userData.message === 'Not Found') {
+        console.log('Not found')
+      } else {
+        const history = localStorage.getItem('searchHistory')
+        const searchHistory = history ? JSON.parse(history) : []
+        const isDuplicated = searchHistory.some((item:UserData) => item.id === userData.id)
 
-      if (!isDuplicated) {
-        searchHistory.push(userData)
-        localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
+        if (!isDuplicated) {
+          searchHistory.push(userData)
+          localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
+        }
+
+        setUser(userData)
       }
-
-      setUser(userData)
     } catch (err) {
       console.log(err)
     } finally {
@@ -41,6 +46,10 @@ const App = () => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setUserSearch(e.target.value)
+  }
+
+  const handleToggleModal = () => {
+    setOpenModal(!openModal)
   }
 
   useEffect(() => {
@@ -56,11 +65,16 @@ const App = () => {
   }, [history])
 
   return (
-    <main className='flex flex-col justify-between h-200px space-y-5'>
+    <main className='flex flex-col p-10 justify-between space-y-5'>
       <Header />
       <SearchField searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
-      <Card data={user} />
-      <History historyData={history} />
+      <button onClick={handleToggleModal}>Open modal</button>
+      {user.login
+        ? (<Card data={user} />)
+        : isLoading
+          ? (<p>cargando...</p>)
+          : (<p>buscar usuario..</p>)}
+      <History historyData={history} openModal={openModal} />
       <Footer />
     </main>
   )
