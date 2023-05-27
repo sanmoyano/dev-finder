@@ -53,13 +53,14 @@ const App = () => {
   console.log(loading)
 
   return (
-    <div className='flex flex-col justify-between h-200px space-y-5'>
-      <form onSubmit={handleClick}>
-        <input className='inputblock w-full text-lg p-2' placeholder='Search user...' value={searchUser} onChange={handleOnChange} />
-        <button type='submit'>search</button>
-      </form>
-      <p className='text-xl'>{user.name}</p>
-    </div>
+    loading &&
+      <div className='flex flex-col justify-between h-200px space-y-5'>
+        <form onSubmit={handleClick}>
+          <input className='inputblock w-full text-lg p-2' placeholder='Search user...' value={searchUser} onChange={handleOnChange} />
+          <button type='submit'>search</button>
+        </form>
+        <p className='text-xl'>{user.name}</p>
+      </div>
   )
 }
 
