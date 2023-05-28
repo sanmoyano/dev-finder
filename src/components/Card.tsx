@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding } from '@fortawesome/free-regular-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faGlobe } from '@fortawesome/free-solid-svg-icons'
+import { faGlobe, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 import { UserData } from '../types'
 
@@ -10,10 +10,10 @@ interface Props {
 }
 
 const Card = ({ data }: Props) => {
-  const { login, avatar_url: avatar, bio, blog, company, followers, following, name, public_repos: repos, twitter_username: twitter } = data
+  const { login, avatar_url: avatar, bio, blog, company, followers, following, name, public_repos: repos, twitter_username: twitter, location } = data
 
   return (
-    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[320px]'>
+    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[325px]'>
       <div className='flex flex-row justify-between items-center flex-wrap'>
         <img alt={`${name}`} className='w-24 h-24 rounded-full' src={`${avatar}`} />
         <div className='justify-center item-center space-y-2 w-2/3'>
@@ -25,24 +25,47 @@ const Card = ({ data }: Props) => {
         </div>
       </div>
       <div className='flex flex-row justify-between'>
-        <div className='flex flex-col space-y-3'>
-          <a href={`https://twitter.com/${twitter}`} rel='noreferrer' target='_blank'>
-            <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
-              <FontAwesomeIcon fontSize='1rem' icon={faTwitter} style={{ marginRight: 10 }} />
-              {twitter}
-            </p>
-          </a>
-          <p className='text-sm font-mono align-text-top font-bold'>
-            <FontAwesomeIcon fontSize='1rem' icon={faBuilding} style={{ marginRight: 10 }} />
-            {company}
-          </p>
-        </div>
-        <a href={`${blog}`} rel='noreferrer' target='_blank'>
-          <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
-            <FontAwesomeIcon fontSize='1rem' icon={faGlobe} style={{ marginRight: 10 }} />
-            {blog}
-          </p>
-        </a>
+        {twitter || company
+          ? (
+            <div className='flex flex-col space-y-2'>
+              {twitter && (
+                <a href={`https://twitter.com/${twitter}`} rel='noreferrer' target='_blank'>
+                  <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
+                    <FontAwesomeIcon fontSize='1rem' icon={faTwitter} style={{ marginRight: 10 }} />
+                    {twitter}
+                  </p>
+                </a>
+              )}
+
+              {company && (
+                <p className='text-sm font-mono align-text-top font-bold'>
+                  <FontAwesomeIcon fontSize='1rem' icon={faBuilding} style={{ marginRight: 10 }} />
+                  {company}
+                </p>
+              )}
+            </div>
+            )
+          : null}
+        {blog || location
+          ? (
+            <div className='flex flex-col space-y-2'>
+              {blog && (
+                <a href={`${blog}`} rel='noreferrer' target='_blank'>
+                  <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
+                    <FontAwesomeIcon fontSize='1rem' icon={faGlobe} style={{ marginRight: 10 }} />
+                    {blog}
+                  </p>
+                </a>
+              )}
+              {location && (
+                <p className='text-sm font-mono align-text-top font-bold'>
+                  <FontAwesomeIcon fontSize='1rem' icon={faLocationDot} style={{ marginRight: 10 }} />
+                  {location}
+                </p>
+              )}
+            </div>
+            )
+          : (null)}
       </div>
       <div className='flex flex-row justify-between items-center'>
         <div className='justify-start space-y-1'>

@@ -18,7 +18,7 @@ const App = () => {
     e.preventDefault()
     setLoading(true)
     try {
-      const res = await fetch('https://api.github.com/users/goncy')
+      const res = await fetch(`https://api.github.com/users/${searchUser}`)
       const userData = await res.json()
 
       if (userData.message === 'Not Found') {
