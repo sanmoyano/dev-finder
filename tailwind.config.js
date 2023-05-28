@@ -7,8 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        bgColor: 'rgba(255,255,255,.1)',
-        button: 'rgba(255,255,255,.2)'
+        white: '#f5f5f5',
+        gitBlack: '#0d1117',
+        gitGray: '#30363d',
+        gitBlue: '#2f81f7',
+        gitGreen: '#238636',
+        gitYellow: '#e3b341',
+        button: '#21262d'
       }
     }
   },

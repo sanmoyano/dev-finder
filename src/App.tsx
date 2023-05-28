@@ -72,7 +72,7 @@ const App = () => {
         ? (<Card data={user} />)
         : isLoading
           ? (<p>cargando...</p>)
-          : (<p>buscar usuario..</p>)}
+          : (<p className='text-center font-mono text-white text-sm'>Find a developer searching by user name</p>)}
       <History historyData={history} openModal={openModal} />
       <Footer />
     </main>
