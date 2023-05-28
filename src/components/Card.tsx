@@ -1,3 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBuilding } from '@fortawesome/free-regular-svg-icons'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faGlobe } from '@fortawesome/free-solid-svg-icons'
+
 import { UserData } from '../types'
 
 interface Props {
@@ -5,21 +10,59 @@ interface Props {
 }
 
 const Card = ({ data }: Props) => {
-  const { login, avatar_url: avatar, bio, blog, company, email, followers, following, name, public_repos: repos, twitter_username: twitter } = data
+  const { login, avatar_url: avatar, bio, blog, company, followers, following, name, public_repos: repos, twitter_username: twitter } = data
 
   return (
-    <div className='flex-row'>
-      <p>{login}</p>
-      <img src={`uri(${avatar})`} />
-      <p>{bio}</p>
-      <p>{blog}</p>
-      <p>{company}</p>
-      <p>{email}</p>
-      <p>{followers}</p>
-      <p>{following}</p>
-      <p>{name}</p>
-      <p>{repos}</p>
-      <p>{twitter}</p>
+    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[320px]'>
+      <div className='flex flex-row justify-between items-center flex-wrap'>
+        <img alt={`${name}`} className='w-24 h-24 rounded-full' src={`${avatar}`} />
+        <div className='justify-center item-center space-y-2 w-2/3'>
+          <div className='flex flex-row items-center space-x-3'>
+            <h1 className='font-mono font-bold text-lg'>{name}</h1>
+            <a className='font-mono text-base text-gitBlue' href={`https://github.com/${login}`} rel='noreferrer' target='_blank'>/{login}</a>
+          </div>
+          <h2 className='font-mono text-sm'>{bio}</h2>
+        </div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div className='flex flex-col space-y-3'>
+          <a href={`https://twitter.com/${twitter}`} rel='noreferrer' target='_blank'>
+            <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
+              <FontAwesomeIcon fontSize='1rem' icon={faTwitter} style={{ marginRight: 10 }} />
+              {twitter}
+            </p>
+          </a>
+          <p className='text-sm font-mono align-text-top font-bold'>
+            <FontAwesomeIcon fontSize='1rem' icon={faBuilding} style={{ marginRight: 10 }} />
+            {company}
+          </p>
+        </div>
+        <a href={`${blog}`} rel='noreferrer' target='_blank'>
+          <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
+            <FontAwesomeIcon fontSize='1rem' icon={faGlobe} style={{ marginRight: 10 }} />
+            {blog}
+          </p>
+        </a>
+      </div>
+      <div className='flex flex-row justify-between items-center'>
+        <div className='justify-start space-y-1'>
+          <p className='font-mono font-bold text-sm'>Repos</p>
+          <p className='font-mono font-bold text-lg bg-gitGray rounded-full text-center'>{repos}</p>
+        </div>
+        <div className='justify-start space-y-1'>
+          <p className='font-mono font-bold text-sm'>Followers</p>
+          <p className='font-mono font-bold text-lg'>{followers}</p>
+        </div>
+        <div className='justify-start space-y-1'>
+          <p className='font-mono font-bold text-sm'>Followings</p>
+          <p className='font-mono font-bold text-lg'>{following}</p>
+        </div>
+      </div>
+      <div className='flex justify-end items-center space-x-5'>
+        <span title='save card as image'>
+          <button className='text-gitGreen border hover:bg-gitGreen hover:text-white border-gitGreen py-1 px-2 rounded-full font-bold font-mono text-xs' onClick={() => console.log('copy image dev')}>Save Dev</button>
+        </span>
+      </div>
     </div>
   )
 }

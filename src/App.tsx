@@ -18,7 +18,7 @@ const App = () => {
     e.preventDefault()
     setLoading(true)
     try {
-      const res = await fetch(`https://api.github.com/users/${searchUser}`)
+      const res = await fetch('https://api.github.com/users/goncy')
       const userData = await res.json()
 
       if (userData.message === 'Not Found') {
@@ -65,14 +65,14 @@ const App = () => {
   }, [history])
 
   return (
-    <main className='flex flex-col p-10 justify-between space-y-5'>
+    <main className='flex flex-col p-10 justify-between space-y-5 w-[600px]'>
       <Header />
       <SearchField handleToggleModal={handleToggleModal} searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
       {user.login
         ? (<Card data={user} />)
         : isLoading
           ? (<p>cargando...</p>)
-          : (<p className='text-center font-mono text-white text-sm'>Find a developer searching by user name</p>)}
+          : (<p className='text-center font-mono text-white text-sm'>Search for a developer by their username</p>)}
       <History historyData={history} openModal={openModal} />
       <Footer />
     </main>
