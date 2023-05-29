@@ -13,7 +13,7 @@ const App = () => {
   const [history, setHistory] = useState<UserData[]>([])
   const [isLoading, setLoading] = useState<boolean>(false)
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [fav, setFav] = useState<boolean>(false)
+  const [fav, setFav] = useState<{ [key: number]: boolean }>({})
 
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -55,10 +55,19 @@ const App = () => {
     setOpenModal(!openModal)
   }
 
-  const handleFav = (userId:number) => {
-    if (user.id === userId) {
-      setFav(!fav)
-    }
+  const handleFav = (userId: number) => {
+    setFav((prevFav) => {
+      return {
+        ...prevFav,
+        [userId]: !prevFav[userId]
+      }
+    })
+  }
+
+  const deleteHistory = () => {
+    localStorage.clear()
+    setHistory([])
+    setUser({} as UserData)
   }
 
   useEffect(() => {
@@ -84,7 +93,7 @@ const App = () => {
             ? (<p>cargando...</p>)
             : (<p className='text-center font-mono text-white text-sm'>Search for a developer by their username</p>)}
       </div>
-      <History fav={fav} handleFav={handleFav} historyData={history} openModal={openModal} />
+      <History cleanHistory={deleteHistory} fav={fav} handleFav={handleFav} historyData={history} openModal={openModal} />
       <Footer />
     </main>
   )
