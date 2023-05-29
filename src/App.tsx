@@ -13,6 +13,7 @@ const App = () => {
   const [history, setHistory] = useState<UserData[]>([])
   const [isLoading, setLoading] = useState<boolean>(false)
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [fav, setFav] = useState<boolean>(false)
 
   const handleClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -27,6 +28,8 @@ const App = () => {
         const history = localStorage.getItem('searchHistory')
         const searchHistory = history ? JSON.parse(history) : []
         const isDuplicated = searchHistory.some((item:UserData) => item.id === userData.id)
+
+        setHistory(searchHistory)
 
         if (!isDuplicated) {
           searchHistory.push(userData)
@@ -52,6 +55,12 @@ const App = () => {
     setOpenModal(!openModal)
   }
 
+  const handleFav = (userId:number) => {
+    if (user.id === userId) {
+      setFav(!fav)
+    }
+  }
+
   useEffect(() => {
     const storedHistory = localStorage.getItem('searchHistory')
 
@@ -65,15 +74,17 @@ const App = () => {
   }, [history])
 
   return (
-    <main className='flex flex-col p-10 justify-between space-y-5 w-[600px]'>
-      <Header />
-      <SearchField handleToggleModal={handleToggleModal} searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
-      {user.login
-        ? (<Card data={user} />)
-        : isLoading
-          ? (<p>cargando...</p>)
-          : (<p className='text-center font-mono text-white text-sm'>Search for a developer by their username</p>)}
-      <History historyData={history} openModal={openModal} />
+    <main>
+      <div className='flex flex-col p-10 justify-between space-y-5 w-[600px]'>
+        <Header />
+        <SearchField handleToggleModal={handleToggleModal} searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
+        {user.login
+          ? (<Card data={user} />)
+          : isLoading
+            ? (<p>cargando...</p>)
+            : (<p className='text-center font-mono text-white text-sm'>Search for a developer by their username</p>)}
+      </div>
+      <History fav={fav} handleFav={handleFav} historyData={history} openModal={openModal} />
       <Footer />
     </main>
   )
