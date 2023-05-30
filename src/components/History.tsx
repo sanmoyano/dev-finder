@@ -13,7 +13,7 @@ interface Props {
 
 const History = ({ historyData, openModal, fav, handleFav, cleanHistory } : Props) => {
   return (
-    <div className={`${openModal ? 'translate-x-0' : 'translate-x-[100%]'} pb-5 flex flex-col justify-between ease-out duration-200 absolute top-0 right-0 bg-gitGray h-screen w-[320px] mt-0 `}>
+    <div className={`${openModal ? 'translate-x-0' : 'translate-x-[100%]'} pb-5 flex flex-col justify-between ease-out duration-200 absolute top-0 right-0 bg-gitGray h-screen w-[320px] mt-0`}>
       <div className='overflow-y-auto'>
         {historyData?.map((user) => (
           <div key={user.id} className='hover:bg-button' onClick={() => handleFav(user.id)}>

@@ -83,8 +83,8 @@ const App = () => {
   }, [history])
 
   return (
-    <main>
-      <div className='flex flex-col p-10 justify-between space-y-5 w-[600px]'>
+    <main className='grid h-screen w-screen'>
+      <div className='flex flex-col p-5 sm:w-[520px] space-y-5 m-auto'>
         <Header />
         <SearchField handleToggleModal={handleToggleModal} searchUser={searchUser} onHandlerChange={handleOnChange} onHandlerClick={handleClick} />
         {user.login

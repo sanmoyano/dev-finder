@@ -13,21 +13,23 @@ const Card = ({ data }: Props) => {
   const { login, avatar_url: avatar, bio, blog, company, followers, following, name, public_repos: repos, twitter_username: twitter, location } = data
 
   return (
-    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[325px]'>
-      <div className='flex flex-row justify-between items-center flex-wrap'>
+    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[350px]'>
+      <div className='flex flex-row space-x-5 items-center w-full'>
         <img alt={`${name}`} className='w-24 h-24 rounded-full' src={`${avatar}`} />
-        <div className='justify-center item-center space-y-2 w-2/3'>
+        <div className='justify-center item-center space-y-2 w-full'>
           <div className='flex flex-row items-center space-x-3'>
             <h1 className='font-mono font-bold text-lg'>{name}</h1>
-            <a className='font-mono text-base text-gitBlue' href={`https://github.com/${login}`} rel='noreferrer' target='_blank'>/{login}</a>
+            <span title='GitHub'>
+              <a className='font-mono text-base text-gitBlue hover:underline' href={`https://github.com/${login}`} rel='noreferrer' target='_blank'>/{login}</a>
+            </span>
           </div>
           <h2 className='font-mono text-sm'>{bio}</h2>
         </div>
       </div>
-      <div className='flex flex-row justify-between'>
+      <div className='flex flex-row justify-between w-full'>
         {twitter || company
           ? (
-            <div className='flex flex-col space-y-2'>
+            <div className='flex flex-col space-y-2 w-[50%]'>
               {twitter && (
                 <a href={`https://twitter.com/${twitter}`} rel='noreferrer' target='_blank'>
                   <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
@@ -48,10 +50,10 @@ const Card = ({ data }: Props) => {
           : null}
         {blog || location
           ? (
-            <div className='flex flex-col space-y-2'>
+            <div className='flex flex-col space-y-2 w-[50%]'>
               {blog && (
                 <a href={`${blog}`} rel='noreferrer' target='_blank'>
-                  <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue '>
+                  <p className='text-sm font-mono align-text-top font-bold hover:text-gitBlue truncate'>
                     <FontAwesomeIcon fontSize='1rem' icon={faGlobe} style={{ marginRight: 10 }} />
                     {blog}
                   </p>
