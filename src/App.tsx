@@ -68,6 +68,7 @@ const App = () => {
     localStorage.clear()
     setHistory([])
     setUser({} as UserData)
+    handleToggleModal()
   }
 
   useEffect(() => {
@@ -93,7 +94,7 @@ const App = () => {
             ? (<p>cargando...</p>)
             : (<p className='text-center font-mono text-white text-sm'>Search for a developer by their username</p>)}
       </div>
-      <History cleanHistory={deleteHistory} fav={fav} handleFav={handleFav} historyData={history} openModal={openModal} />
+      <History cleanHistory={deleteHistory} closeModal={handleToggleModal} fav={fav} handleFav={handleFav} historyData={history} openModal={openModal} />
       <Footer />
     </main>
   )
