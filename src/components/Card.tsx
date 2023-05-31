@@ -26,7 +26,7 @@ const Card = ({ data }: Props) => {
           <h2 className='font-mono text-sm'>{bio}</h2>
         </div>
       </div>
-      <div className='flex flex-row justify-between w-full'>
+      <div className='flex flex-row justify-between w-full mt-5'>
         {twitter || company
           ? (
             <div className='flex flex-col space-y-2 w-[50%]'>
@@ -69,7 +69,7 @@ const Card = ({ data }: Props) => {
             )
           : (null)}
       </div>
-      <div className='flex flex-row justify-between items-center'>
+      <div className='flex flex-row justify-between items-center mt-5'>
         <div className='justify-start space-y-1'>
           <p className='font-mono font-bold text-sm'>Repos</p>
           <p className='font-mono font-bold text-lg bg-gitGray rounded-full text-center'>{repos}</p>
