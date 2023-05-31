@@ -14,13 +14,13 @@ interface Props {
 
 const History = ({ historyData, openModal, fav, handleFav, cleanHistory, closeModal } : Props) => {
   return (
-    <div className={`${openModal ? 'translate-x-0' : 'translate-x-[100%]'} pb-5 flex-col space-y-2 ease-out duration-200 absolute top-0 right-0 bg-gitGray h-screen w-[320px] mt-0`}>
+    <div className={`${openModal ? ' translate-x-0' : 'translate-x-full'} pb-5 flex flex-col transform space-y-2 transition-all ease-out duration-200 fixed top-0 right-0 bg-gitGray h-screen w-[320px] mt-0 justify-between`}>
       <div className='flex justify-start items-center mt-2 ml-5'>
         <button className=' p-3 rounded-full font-bold font-mono text-sm flex items-center gap-2' onClick={() => closeModal()}>
           <FontAwesomeIcon fontSize='1.4rem' icon={faClose} />
         </button>
       </div>
-      <div className='overflow-y-auto w-full h-full'>
+      <div className='h-screen overflow-y-auto'>
         {historyData.length === 0
           ? <div className='flex item-center justify-center'><p className='text-sm font-mono font-bold'>Historial vacio...</p></div>
           : historyData?.map((user) => (

@@ -13,6 +13,7 @@ export default {
         gitBlue: '#2f81f7',
         gitGreen: '#238636',
         gitYellow: '#e3b341',
+        gitRed: '#e34c26',
         button: '#21262d'
       }
     }
