@@ -14,7 +14,7 @@ interface Props {
 
 const History = ({ historyData, openModal, fav, handleFav, cleanHistory, closeModal } : Props) => {
   return (
-    <div className={`${openModal ? 'translate-x-0' : 'translate-x-[100%]'} pb-5 flex flex-col space-y-2 ease-out duration-200 absolute top-0 right-0 bg-gitGray h-screen w-[320px] mt-0`}>
+    <div className={`${openModal ? 'translate-x-0' : 'translate-x-[100%]'} pb-5 flex-col space-y-2 ease-out duration-200 absolute top-0 right-0 bg-gitGray h-screen w-[320px] mt-0`}>
       <div className='flex justify-start items-center mt-2 ml-5'>
         <button className=' p-3 rounded-full font-bold font-mono text-sm flex items-center gap-2' onClick={() => closeModal()}>
           <FontAwesomeIcon fontSize='1.4rem' icon={faClose} />

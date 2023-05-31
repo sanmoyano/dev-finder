@@ -13,7 +13,7 @@ const Card = ({ data }: Props) => {
   const { login, avatar_url: avatar, bio, blog, company, followers, following, name, public_repos: repos, twitter_username: twitter, location } = data
 
   return (
-    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[350px]'>
+    <div className='flex-col flex p-5 bg-gitBlack border justify-between border-gitGray rounded-lg h-[350px]' id='user-card'>
       <div className='flex flex-row space-x-5 items-center w-full'>
         <img alt={`${name}`} className='w-24 h-24 rounded-full' src={`${avatar}`} />
         <div className='justify-center item-center space-y-2 w-full'>
@@ -85,7 +85,7 @@ const Card = ({ data }: Props) => {
       </div>
       <div className='flex justify-end items-center space-x-5'>
         <span title='save card as image'>
-          <button className='text-gitGreen border hover:bg-gitGreen hover:text-white border-gitGreen py-1 px-2 rounded-full font-bold font-mono text-xs' onClick={() => console.log('copy image dev')}>Save Dev</button>
+          <button className='text-gitGreen border hover:bg-gitGreen hover:text-white border-gitGreen py-1 px-2 rounded-full font-bold font-mono text-xs' onClick={() => ''}>Copy Dev</button>
         </span>
       </div>
     </div>
